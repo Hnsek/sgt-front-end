@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Calendar from './modules/calendar/calendar'
+import VehicleReports from './modules/vehicleReports/vehicleReports'
+import { Route, Routes, Link, Navigate, Redirect } from 'react-router-dom'
+import './App.css'
 
-function App() {
+export default () => {
+  const [authenticated, setAuthenticated] = useState(true)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      
+      <div className='body'>
+       <Routes >
+        <Route path='/calendario' element={<Calendar authenticated={authenticated} />} />
+        <Route defa path='/relatorios-veiculares' element={ authenticated ? <VehicleReports authenticated={authenticated}  /> : <Navigate to='/calendario'/>} />
+        <Route path="*" element={<Navigate to="/calendario" />} />
+        </Routes>
+      </div>
+
   );
 }
 
-export default App;

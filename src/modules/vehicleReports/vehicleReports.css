@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Yanone+Kaffeesatz:wght@300&display=swap');
+*{
+    --colorBusyVehicle: #38b000;
+    --colorBusyVehicleHover: #2f9500;
+    --colorSecondary:#38b000;
+    --colorSecondaryLight:#38b00086;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#body{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--colorSecondary);
+    display:flex;
+    flex-direction: row;
+}
+
+.tabs{
+    height: 100%;
+    width: 20%;
+    background-color: white;
+    border-right:0.1vw solid rgba(0, 0, 0, 0.6);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttonTab{
+    background-color: transparent;
+    border:0;
+    margin-top: 1vw;
+    font-size: 1.5vw;
+    transition: 0.2s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+@keyframes buttonTabAnimation {
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 90%;
+    }
+}
+.buttonTab:hover::after{
+    content: '';
+    width: 90%;
+    animation:  buttonTabAnimation 0.25s;
+    border-bottom:0.1vw solid var(--colorSecondaryLight)
+}
+/* .buttonTab:hover{
+    border-bottom: 0.1vw solid var(--colorSecondaryLight);
+    width: 90%;
+} */
+
+
+.primarySection{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.primaryArticleContainer{
+    width: 90%;
+    height: 97%;
+    margin-left: 1vw;
+    background-color: white;
+}

@@ -1,0 +1,301 @@
+
+
+
+.containerCalendar {
+    
+    flex-grow: 1;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    background-color: var(--colorSecondary);
+}
+.itemInfoDay{
+    margin-bottom: 0.5vw;
+}
+.saberMais{
+    font-size: 0.8vw;
+    margin: 0;
+    padding: 0;
+}
+.calendar {
+    position: absolute;
+    width: 80%;
+    height: 91%;
+    padding: 1.5%;
+    padding-top: 0;
+    margin-left: 1.5vw;
+    background-color: #e9ecef;
+    display: flex;
+    border: 0.05vw solid rgba(0, 0, 0, 0.5);
+
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerCalendar {
+    margin-top: 0.7%;
+    width: 98%;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.arrowButtonsCalendar {
+    width: 7%;
+    height: 80%;
+    cursor:pointer;
+}
+
+.month {
+    font-size: 130%;
+}
+.daysOfWeek{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1vw solid rgba(0, 0, 0, 0.17);
+    font-size: 140%;
+}
+.containerDays {
+    width: 100%;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-start: 5;
+    grid-template-rows: 0.17fr;
+    row-gap: 1%;
+    column-gap: 0.3%;
+    /* background-color: red; */
+
+    padding: 0.3%;
+
+}
+
+.daysButtons {
+    width: 100%;
+    height: 100%;
+    border: 0.1vw solid rgba(0, 0, 0, 0.17);
+    font-size: 150%;
+    
+}
+
+.daysButtons:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.legends {
+    position: absolute;
+    right:0;    
+    display: flex;
+    width: 16%;
+    /* background-color: red; */
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerLegends {
+    display: flex;
+    width: 75%;
+    align-items: center;
+    color: white
+}
+
+@media screen and (max-width: 700px) {
+    .legends {
+        display: none;
+    }
+    .calendar{
+        width: 93%;
+    }
+}
+
+.boxLegends {
+    border: 0.3vw solid black;
+    height: 2.3vw;
+    width: 2.3vw;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 30px;
+    max-height: 30px;
+}
+.boxBlue{
+    background-color:var(--colorBusyVehicle);
+}
+
+.textLegends {
+    margin-left: 0.8vw;
+}
+.blueButton{ 
+    background-color: var(--colorBusyVehicle); 
+    color:white;
+    cursor: pointer;
+
+}
+
+.blueButton:hover{
+    background-color: var(--colorBusyVehicleHover);
+}
+.backgroundInformationDay{ 
+    display: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    z-index:1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.containerInformationDay{
+    width: 27%;
+    /* width: 30%;
+    min-width: 280px; */
+    height: 100vh;
+    background-color: white;
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation:  anim 0.1s linear;
+    }
+@keyframes anim{
+    0%{
+        width: 0%;
+    }
+    100%{
+        width: 27%;
+    }
+    
+}
+.quitInformationDay{ 
+    background-color: rgba(0,0,0,0);
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quitInformationDayButton{
+    height: 100%;
+    width: 73%;
+    position: fixed;
+    background-color: rgba(0,0,0,0);
+}
+.headerContainerInformationDay{
+    width: 100%;
+    height: 13%;
+    background-color: var(--colorSecondary);
+    display: flex;
+    align-items: center;
+}
+tr,th, table{
+    border:0.1vw solid black;
+}
+table{
+    width: 90%;
+}
+span{
+    display: block;
+    font-size: clamp(12px, 1.5vw, 1.5vw);
+    margin-bottom: 0.3vw;
+    margin-left: 1vw;
+}
+.buttonQuiteInformationDay{
+    height: 70%;
+    min-height: 10px;
+    width: 22%;
+    margin-left: 0.4vw;
+    cursor: pointer;
+    min-width: 75px;
+}
+
+.optionsContainer{
+    position:fixed;
+    top:0.5vw;
+    right:0.5vw
+}
+
+.optionEnable{
+    height: 3vw;
+    width: 4vw;
+    cursor: pointer;
+}
+
+@keyframes options{
+    0%{
+        height: 0vw;
+        width: 0;
+    }
+    100%{
+        height: 12vw;
+        width: 12vw;    
+    }
+}
+.options{
+    /* height: 20vw; */
+    width: 12vw;
+    height: 14vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border:0.1vw solid black; */
+    box-shadow: 0.1vw 0.1vw 0.1vw black;
+    border:0.01vw solid rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
+    animation: options 0.075s;
+}
+
+.optionButtons{
+    margin-bottom: 0.4vw;
+    /* height: 100%;    */
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    width: 90%;
+    border-radius: 0.3vw;
+    border:0.1vw solid black;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.12s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color:black;
+    font-size: 0.9vw;
+}
+.optionButtons:hover{
+    background-color: var(--colorSecondary);
+    color:white;
+}
+
+.headerButtonsOptions{
+    height: 3.5vw;
+    background-color: rgba(0,0,0,0.2);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0.75vw;
+    border-bottom: 0.1vw solid rgba(0,0,0,0.2);
+    
+}
+
+.closeOptionButtons{
+    margin-right:0.5vw;
+    height:70%;
+    width:19%; 
+    font-size:1.5vw;
+    transition: 0.12s;
+    cursor: pointer;
+    border-radius: 0.3vw;
+
+    
+}
+.closeOptionButtons:hover{
+    background-color: var(--colorSecondary);
+    color:white;
+}
