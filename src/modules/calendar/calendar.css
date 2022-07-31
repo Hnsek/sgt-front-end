@@ -45,6 +45,8 @@
     width: 7%;
     height: 80%;
     cursor:pointer;
+    background-color: transparent;
+    border: 0;
 }
 
 .month {
@@ -221,8 +223,11 @@ span{
 .optionEnable{
     height: 3vw;
     width: 4vw;
+    background-color: transparent;
+    border: 0;
     cursor: pointer;
 }
+
 
 @keyframes options{
     0%{
@@ -297,5 +302,18 @@ span{
 }
 .closeOptionButtons:hover{
     background-color: var(--colorSecondary);
+    color:white;
+}
+
+.errorMessage{
+    background-color: red;
+    padding-right: 5%;
+    padding-left: 5%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80%;
+    border:0.1vw solid white;
     color:white;
 }

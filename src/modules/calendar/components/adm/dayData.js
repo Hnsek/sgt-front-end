@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './dayData.css'
 import Loading from '../../../../components/loading'
 
+import Env from '../../../../Env'
+
 export default ({ setInformationDaysVisible, informationDay, setInformationDays, day, month, year, refreshDays }) => {
 
 
     const [dataViagem, setDataViagem] = useState('')
     const [horarioSaida, setHorarioSaida] = useState('')
-    const [veiculo, setVeiculo] = useState('')
+    const [veiculo, setVeiculo] = useState('Parati')
     const [dataPedido, setDataPedido] = useState('')
     const [motorista, setMotorista] = useState('')
     const [destino, setDestino] = useState('')
@@ -18,6 +20,7 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
 
     const [errorSendTrip, setErrorSendTrip] = useState(undefined)
     const [succeedSendTrip, setSucceedSendTrip] = useState(undefined)
+
 
     const deleteTravel = (idDayExcluded) => {
         // console.log("Executed")
@@ -56,10 +59,10 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
         form.append('destiny', destino);
         form.append('dateBack', dataPrevistaVolta);
         form.append('timeback', horarioPrevitoVolta);
-
+        
 
         setSendTripLoading(true)
-        fetch('http://localhost/SGST/back-end/index.php?route=registerTrip', {
+        fetch(Env.urlServer + '/index.php?route=registerTrip', {
             method: 'POST',
             body: form,
         })
@@ -69,6 +72,7 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                 if(result === 1){
                     setErrorSendTrip(undefined)
                     setSucceedSendTrip("Viagem cadastrada com sucesso")
+                    setErrorSendTrip(undefined)
                     setInformationDays(iD => [...iD, {
                         day:day,
                         month:monthFormated,
@@ -90,7 +94,11 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                 setSendTripLoading(false)
                 
             })
-            .catch(erro => console.log(erro))
+            .catch(erro => {
+                setSendTripLoading(false)
+                setErrorSendTrip("Não foi possível efetuar o cadastro da viagem")
+                console.log(erro)
+                })
 
     }
 
@@ -100,7 +108,7 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
 
                 <button className='quitInformationDayButton' onClick={() => {
                     setInformationDaysVisible(false)
-                    refreshDays()
+                    refreshDays(year, month)
                     }}>
 
                 </button>
@@ -125,7 +133,13 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                             </div>
                             <div className='containerInputs'>
                                 <label>Veículo: </label>
-                                <input className='inputs' value={veiculo} onChange={(value) => setVeiculo(value.target.value)}></input>
+                                {/* <input className='inputs' value={veiculo} onChange={(value) => setVeiculo(value.target.value)}></input> */}
+                                <select id="selectVeiculo" onChange={(e)=>setVeiculo(e.target.value)}>
+                                    <option value='Parati'>Parati</option>
+                                    <option value='Amarok'>Amarok</option>
+                                    <option value='L200'>L200</option>
+                                    <option value='Micro-ônibus'>Micro-ônibus</option>
+                                </select>
                             </div>
                             <div className='containerInputs'>
                                 <label>Data de pedido: </label>

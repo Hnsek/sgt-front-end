@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import './vehicleReports.css'
 import { Link } from 'react-router-dom'
 
+import Transport from './modules/transport/transport'
+import OptionsActivedSVG from '../../assets/optionsActived.svg'
+import OptionsSVG from '../../assets/options.svg'
 export default ({ authenticated }) => {
     const [optionButton, setOptionButton] = useState(false)
     const [activeTab, setActiveTab] = useState('transport')
+    const [optionsActived, setOptionsActived] = useState(false)
 
     return (
         <div id='body'>
+            {/* Caso for implementar as demais opções futuramente */}
 
-            <aside className='tabs'>
+            {/* <aside className='tabs'>
                 <button className='buttonTab'>
                     <span className='buttonTabText'>Transporte</span>
 
@@ -20,12 +25,17 @@ export default ({ authenticated }) => {
                 <button className='buttonTab'>
                     <span className='buttonTabText'>Combustíveis</span>
                 </button>
-            </aside>
+            </aside> */}
             <section className='primarySection'>
+
                 <article className='optionsContainer'>
+
+
                     {
                         !optionButton ?
-                            <button className='optionEnable' onClick={() => setOptionButton(ob => !ob)}></button>
+                            <button onMouseOver={() => setOptionsActived(true)} onMouseOut={() => setOptionsActived(false)} className='optionEnable' onClick={() => setOptionButton(ob => !ob)}>
+                                <img src={optionsActived ? OptionsActivedSVG : OptionsSVG} style={{ height: '100%', width: '100%' }} />
+                            </button>
                             :
                             <div className='options'>
                                 <div className='headerButtonsOptions'>
@@ -40,9 +50,8 @@ export default ({ authenticated }) => {
                                 </div>
                                 {
                                     !authenticated &&
-                                    <Link className='optionButtons' to={'/calendario'}>Fazer Login</Link>
+                                    <Link className='optionButtons' to={'/login'}>Fazer Login</Link>
                                 }
-                                {/* <Link className='optionButtons' to={'/calendario'}>Agenda</Link> */}
                                 <Link className='optionButtons' to={'/calendario'}>Agenda</Link>
                                 {
                                     authenticated &&
@@ -52,14 +61,13 @@ export default ({ authenticated }) => {
                     }
 
                 </article>
+
                 <article className='primaryArticleContainer'>
-                    <div style={{width:'100%', height:'100%', display:'flex',flexDirection:'column',alignItems:'center'}}>
+                    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
                         {
                             activeTab === 'transport' &&
-                            <article >
-                                <h1>Relatório de transporte</h1>
-                            </article>
+                            <Transport />
                         }
                     </div>
                 </article>
