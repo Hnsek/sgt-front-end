@@ -11,12 +11,14 @@
 }
 .containerInputs{
     margin-bottom: 3%;
-    font-size: 120%;
-    width: 100%;
+    font-size: 100%;
+    width: 80%;
+    height: 10vw;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 label{
     margin-right: 2%;
@@ -24,8 +26,10 @@ label{
 }
 .inputs{
     height: 100%;
-    width: 30%;
+    padding:1vw;
+    width: 1%;
     font-size: 1.35vw;
+    /* background-color: red; */
 }
 .containerAddTravel{
     background-color: white;

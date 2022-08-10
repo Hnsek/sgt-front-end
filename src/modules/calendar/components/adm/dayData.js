@@ -59,46 +59,48 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
         form.append('destiny', destino);
         form.append('dateBack', dataPrevistaVolta);
         form.append('timeback', horarioPrevitoVolta);
-        
+
 
         setSendTripLoading(true)
         fetch(Env.urlServer + '/index.php?route=registerTrip', {
+            headers: {
+                    'token': window.localStorage.getItem('accessToken')
+                }, 
             method: 'POST',
             body: form,
         })
             .then(async resultComplete => {
                 const result = await resultComplete.json();
-                
-                if(result === 1){
+                if (result === 1) {
                     setErrorSendTrip(undefined)
                     setSucceedSendTrip("Viagem cadastrada com sucesso")
                     setErrorSendTrip(undefined)
                     setInformationDays(iD => [...iD, {
-                        day:day,
-                        month:monthFormated,
-                        year:year,
-                        category:veiculo,
+                        day: day,
+                        month: monthFormated,
+                        year: year,
+                        category: veiculo,
                         time: horarioSaida,
-                        requestDate:dataPedido,
-                        driver:motorista,
-                        destiny:destino,
-                        dateBack:dataPrevistaVolta,
-                        timeback:horarioPrevitoVolta
+                        requestDate: dataPedido,
+                        driver: motorista,
+                        destiny: destino,
+                        dateBack: dataPrevistaVolta,
+                        timeback: horarioPrevitoVolta
                     }])
                 }
-                else{
+                else {
                     setSucceedSendTrip(undefined)
                     setErrorSendTrip("Não foi possível efetuar o cadastro da viagem")
                 }
 
                 setSendTripLoading(false)
-                
+
             })
             .catch(erro => {
                 setSendTripLoading(false)
                 setErrorSendTrip("Não foi possível efetuar o cadastro da viagem")
                 console.log(erro)
-                })
+            })
 
     }
 
@@ -109,13 +111,13 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                 <button className='quitInformationDayButton' onClick={() => {
                     setInformationDaysVisible(false)
                     refreshDays(year, month)
-                    }}>
+                }}>
 
                 </button>
                 {
                     sendTripLoading ?
                         <div className='containerAddTravel' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <div style={{height:'5vw', width:'5vw'}}>
+                            <div style={{ height: '5vw', width: '5vw' }}>
                                 <Loading />
                             </div>
                         </div>
@@ -134,7 +136,7 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                             <div className='containerInputs'>
                                 <label>Veículo: </label>
                                 {/* <input className='inputs' value={veiculo} onChange={(value) => setVeiculo(value.target.value)}></input> */}
-                                <select id="selectVeiculo" onChange={(e)=>setVeiculo(e.target.value)}>
+                                <select id="selectVeiculo"  onChange={(e) => setVeiculo(e.target.value)} style={{height: "100%",padding:"0.5vw",width: '80%',fontSize: '1.35vw'}}>
                                     <option value='Parati'>Parati</option>
                                     <option value='Amarok'>Amarok</option>
                                     <option value='L200'>L200</option>
@@ -163,10 +165,10 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                             </div>
 
                             {
-                                errorSendTrip !== undefined && <span style={{color:'red', marginBottom:'-1.5vw', fontSize:'1vw'}}>{errorSendTrip}</span>
+                                errorSendTrip !== undefined && <span style={{ color: 'red', marginBottom: '-1.5vw', fontSize: '1vw' }}>{errorSendTrip}</span>
                             }
                             {
-                                succeedSendTrip !== undefined && <span style={{color:'green', marginBottom:'-1.5vw', fontSize:'1vw'}}>{succeedSendTrip}</span>
+                                succeedSendTrip !== undefined && <span style={{ color: 'green', marginBottom: '-1.5vw', fontSize: '1vw' }}>{succeedSendTrip}</span>
                             }
 
                             <button className="actionButtons" id='registerTravel' onClick={() => sendTravel()}>Cadastrar viagem</button>
@@ -179,7 +181,7 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                     <button className='buttonQuiteInformationDay' onClick={() => {
                         setInformationDaysVisible(false)
                         refreshDays(year, month)
-                        }}>
+                    }}>
 
                     </button>
                 </div>
@@ -189,24 +191,24 @@ export default ({ setInformationDaysVisible, informationDay, setInformationDays,
                         informationDay.map(infoDay => {
                             // console.log("Infoday: ", infoDay)
                             // console.log("Informationday: ", informationDay)
-                            if(infoDay.day === day){
+                            if (infoDay.day === day) {
 
-                            
-                            return <div className='containerInfoDay'>
-                                <span className='itemInfoDay' style={{ marginTop: '1vw' }}>{`Data da viagem: ${infoDay.day}/${infoDay.month}/${infoDay.year}`}</span>
-                                <span className='itemInfoDay'>{`Horário de saída: ${infoDay.time}`}</span>
-                                <span className='itemInfoDay'>{`Veículo: ${infoDay.category}`}</span>
-                                <span className='itemInfoDay'>{`Data do pedido: ${infoDay.requestDate.replace(/-/g, '/')}`}</span>
-                                <span className='itemInfoDay'>{`Motorista: ${infoDay.driver}`}</span>
-                                <span className='itemInfoDay'>{`Destino: ${infoDay.destiny}`}</span>
-                                <span className='itemInfoDay'>{`Data prevista de volta: ${infoDay.dateBack} `}</span>
-                                <span className='itemInfoDay'>{`Horário previsto de volta: ${infoDay.timeback} `}</span>
-                                <div className='containerActionButtons'>
-                                    <button className="actionButtons" onClick={() => deleteTravel(infoDay.__id)}>Excluir</button>
-                                    {/* <button className="actionButtons">Modificar</button> */}
+
+                                return <div className='containerInfoDay'>
+                                    <span className='itemInfoDay' style={{ marginTop: '1vw' }}>{`Data da viagem: ${infoDay.day}/${infoDay.month}/${infoDay.year}`}</span>
+                                    <span className='itemInfoDay'>{`Horário de saída: ${infoDay.time}`}</span>
+                                    <span className='itemInfoDay'>{`Veículo: ${infoDay.category}`}</span>
+                                    <span className='itemInfoDay'>{`Data do pedido: ${infoDay.requestDate.replace(/-/g, '/')}`}</span>
+                                    <span className='itemInfoDay'>{`Motorista: ${infoDay.driver}`}</span>
+                                    <span className='itemInfoDay'>{`Destino: ${infoDay.destiny}`}</span>
+                                    <span className='itemInfoDay'>{`Data prevista de volta: ${infoDay.dateBack} `}</span>
+                                    <span className='itemInfoDay'>{`Horário previsto de volta: ${infoDay.timeback} `}</span>
+                                    <div className='containerActionButtons'>
+                                        <button className="actionButtons" onClick={() => deleteTravel(infoDay.__id)}>Excluir</button>
+                                        {/* <button className="actionButtons">Modificar</button> */}
+                                    </div>
+                                    <hr style={{ width: '100%', marginBottom: '1vw' }} />
                                 </div>
-                                <hr style={{ width: '100%', marginBottom: '1vw' }} />
-                            </div>
                             }
                         })
                     }
